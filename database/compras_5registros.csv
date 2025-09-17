@@ -1,0 +1,6 @@
+documento,nombre,email,telefono,direccion,codigo,producto,marca,unidad,fecha,cantidad,valor_unit
+900123456,Distribuciones Andina S.A.S,contacto@andina.com,3004567890,"Calle 45 #23-10, Bogotá",PR001,Laptop Dell Inspiron 15,Dell,Unidad,2025-09-15,2,2500
+901234567,TecnoGlobal Ltda.,ventas@tecnoglobal.com,3109876543,"Carrera 12 #34-56, Medellín",PR002,Mouse Inalámbrico Logitech M185,Logitech,Unidad,2025-09-16,5,80
+902345678,ElectroHogar Colombia,info@electrohogar.com,3112233445,"Av. Las Palmas 120, Cali",PR003,Impresora HP DeskJet 2710,HP,Unidad,2025-09-16,1,1200
+900123456,Distribuciones Andina S.A.S,contacto@andina.com,3004567890,"Calle 45 #23-10, Bogotá",PR004,Monitor Samsung 24” LED Full HD,Samsung,Unidad,2025-09-17,3,900
+902345678,ElectroHogar Colombia,info@electrohogar.com,3112233445,"Av. Las Palmas 120, Cali",PR002,Mouse Inalámbrico Logitech M185,Logitech,Unidad,2025-09-17,10,75
