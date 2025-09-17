@@ -9,7 +9,7 @@
 <body class="bg-light">
 
 <div class="container mt-5">
-  <h1 class="text-center mb-4">Sistema de Compras - MiElementos</h1>
+  <h1 class="text-center mb-4">Modulo de Compras - MiElementos</h1>
   <div class="list-group shadow">
     <a href="compras/form_compra.php" class="list-group-item list-group-item-action" ><i class="bi bi-cart4"></i> Registrar compra </a>
     <a href="compras/reporte.php" class="list-group-item list-group-item-action"><i class="bi bi-bar-chart-line"></i> Ver Reporte de Compras</a>
