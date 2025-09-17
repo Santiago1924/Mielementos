@@ -1,0 +1,76 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fondo general */
+body {
+  background: linear-gradient( #888484 );
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor principal */
+.container {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  width: 400px;
+  text-align: center;
+}
+
+/* Título */
+.container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Etiquetas */
+label {
+  display: block;
+  text-align: left;
+  margin: 12px 0 6px;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #e9e9ec;
+  box-shadow: 0 0 5px rgba(178, 182, 204, 0.5);
+}
+
+/* Botón */
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}

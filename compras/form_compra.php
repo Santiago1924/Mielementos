@@ -1,83 +1,89 @@
 <?php
 require_once("../database/connection.php");
-$db = new Database;
+$db = new Database();
 $con = $db->conectar();
-?>
 
+// Consultar proveedores
+$sqlProveedores = $con->query("SELECT id_proveedor, nombre FROM proveedor");
+$proveedores = $sqlProveedores->fetchAll(PDO::FETCH_ASSOC);
+
+// Consultar productos
+$sqlProductos = $con->query("SELECT id_producto, nombre FROM producto");
+$productos = $sqlProductos->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Registro de Compras</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Formulario de Compras</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <script>
+    function validarFormulario() {
+      let proveedor = document.forms["compraForm"]["id_proveedor"].value;
+      let producto = document.forms["compraForm"]["id_producto"].value;
+      let cantidad = document.forms["compraForm"]["cantidad"].value;
+      let precio = document.forms["compraForm"]["precio"].value;
+
+    //   campos vacios
+
+      if (proveedor === "" || producto === "" || cantidad === "" || precio === "") {
+        alert(" Todos los campos son obligatorios");
+        return false;
+      }
+      if (isNaN(cantidad) || cantidad <= 0) {
+        alert(" La cantidad debe ser un número positivo");
+        return false;
+      }
+      if (isNaN(precio) || precio <= 0) {
+        alert(" El precio debe ser un número positivo");
+        return false;
+      }
+      return true;
+    }
+  </script>
 </head>
 <body>
-<div class="container mt-5">
-  <h2 class="text-center mb-4">Registro de Compras</h2>
-  <form action="save_compra.php" method="POST" class="card p-4 shadow">
-    
-    <!-- Datos proveedor -->
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <label class="form-label">Documento</label>
-        <input type="text" name="documento" class="form-control" required>
-      </div>
-      <div class="col-md-4">
-        <label class="form-label">Nombre</label>
-        <input type="text" name="nombre" class="form-control" required>
-      </div>
-      <div class="col-md-4">
-        <label class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" required>
-      </div>
-    </div>
+  <div class="container">
+    <h2><i class="bi bi-cart4"></i> <div>Registrar compra</div></h2>
+    <form name="compraForm" action="save_compra.php" method="POST" onsubmit="return validarFormulario()">
 
-    <!-- Fecha compra -->
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <label class="form-label">Fecha Compra</label>
-        <input type="date" name="fecha_compra" class="form-control" required>
-      </div>
-    </div>
+      <label>Proveedor:</label>
+      <select name="id_proveedor" required>
+        <option value="">Seleccione un proveedor</option>
+        <?php foreach ($proveedores as $prov): ?>
+          <option value="<?= $prov['id_proveedor'] ?>"><?= $prov['nombre'] ?></option>
+        <?php endforeach; ?>
+      </select>
 
-    <!-- Productos -->
-    <div id="productos">
-      <div class="row mb-3 producto">
-        <div class="col-md-3">
-          <label class="form-label">Código</label>
-          <input type="text" name="codigo[]" class="form-control" required>
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Nombre Producto</label>
-          <input type="text" name="nombre_producto[]" class="form-control" required>
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Marca</label>
-          <input type="text" name="marca[]" class="form-control" required>
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Cantidad</label>
-          <input type="number" name="cantidad[]" class="form-control" required>
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Valor Unitario</label>
-          <input type="number" step="0.01" name="valor_unitario[]" class="form-control" required>
-        </div>
-      </div>
-    </div>
+      <label>Fecha de Compra:</label>
+      <input type="date" name="fecha_compra" required>
 
-    <button type="button" class="btn btn-secondary mb-3" id="agregarProducto">+ Agregar Producto</button>
-    <button type="submit" class="btn btn-primary w-100">Guardar Compra</button>
-  </form>
-</div>
+      <label>Referencia:</label>
+      <input type="text" name="referencia" placeholder="Ejemplo: Factura 123">
 
-<script>
-  document.getElementById("agregarProducto").addEventListener("click", function() {
-    let div = document.querySelector(".producto").cloneNode(true);
-    div.querySelectorAll("input").forEach(input => input.value = "");
-    document.getElementById("productos").appendChild(div);
-  });
-</script>
+      <hr>
+
+      <label>Producto:</label>
+      <select name="productos[0][id_producto]" required>
+        <option value="">Seleccione un producto</option>
+        <?php foreach ($productos as $prod): ?>
+          <option value="<?= $prod['id_producto'] ?>"><?= $prod['nombre'] ?></option>
+        <?php endforeach; ?>
+      </select>
+
+      <label>Cantidad:</label>
+      <input type="number" name="productos[0][cantidad]" placeholder="Ejemplo: 5" required>
+
+      <label>Precio Unitario:</label>
+      <input type="number" step="0.01" name="productos[0][precio]" placeholder="Ejemplo: 250.50" required>
+
+      <button type="submit"> Guardar Compra</button>
+      <!-- Botón para regresar -->
+      <a href="../index.php">
+        <button type="button">Regresar</button>
+      </a>
+    </form>
+  </div>
 </body>
 </html>

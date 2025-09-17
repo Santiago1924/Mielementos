@@ -1,24 +1,24 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "mi_elementos";  
-    private $username = "root";         
-    private $password = "";             
-    public $con;
+    private $db_name = "MiElementos"; 
+    private $username = "root";       
+    private $password = "";           
+    public $conn;
 
     public function conectar() {
+        $this->conn = null;
         try {
-            $this->con = new PDO(
+            $this->conn = new PDO(
                 "mysql:host=" . $this->host . ";dbname=" . $this->db_name,
                 $this->username,
                 $this->password
             );
-            $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $this->con;
-        } catch (PDOException $e) {
-            echo "Error de conexión: " . $e->getMessage();
-            exit;
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $exception) {
+            echo "Error de conexión: " . $exception->getMessage();
         }
+        return $this->conn;
     }
 }
 ?>
